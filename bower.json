@@ -1,0 +1,24 @@
+{
+  "name": "shmile",
+  "version": "0.0.1",
+  "homepage": "https://github.com/porkbuns/shmile",
+  "authors": [
+    "Andrew Hao <andrewhao@gmail.com>"
+  ],
+  "description": "An open source photobooth.",
+  "main": "app.coffee",
+  "keywords": [
+    "photobooth"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "shmile-ui": "andrewhao/shmile-ui#f5464546679c797636b0dc0bcaecc1b5e6b81bdb"
+  }
+}
