@@ -5,4 +5,4 @@ temp
 .DS_Store
 public/photos/*jp*g
 public/photos/**/*jp*g
-public/components
+public/components/shmile-ui/node_modules
