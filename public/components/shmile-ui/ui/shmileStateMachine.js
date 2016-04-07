@@ -88,16 +88,20 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
           self.fsm.next_set()
         }, self.config.next_delay);
         
+        
+        
       },
       onleavereview_composited: function(e, f, t, data) {
-        socket.on('composited_image', function(url) {
-          console.log('generated_thumb evt: '+url);
-          var url = $url;
-        });
         $("#form").load("/templates/webform.html");
         $("#form").removeClass("hide");
-        alert('AHHHHHH');
 
+
+        // Lbarker's attempt to fetch data through socket
+        //socket.on('composited_image', function(output_file_path) {
+        //    alert('The server has a message for you: ' + output_file_path);
+        //   console.log("tweet from", output_file_path);
+        //})
+        
         // Clean up
         //self.photoView.animate('out');
         //self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
@@ -109,6 +113,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         console.log('fsm received event '+ e +', changing state from ' + f + ' to ' + t)
       }
 
+      
     }
   });
 }

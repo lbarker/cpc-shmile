@@ -18,6 +18,7 @@ ImageCompositor = require("./lib/image_compositor")
 exp = express()
 web = http.createServer(exp)
 
+
 exp.configure ->
   exp.set "views", __dirname + "/views"
   exp.set "view engine", "jade"
@@ -30,13 +31,13 @@ exp.get "/", (req, res) ->
   res.render "index",
     title: "shmile"
     extra_css: []
-    image_paths: PhotoFileUtils.composited_images(true)
 
 exp.get "/gallery", (req, res) ->
   res.render "gallery",
     title: "gallery!"
     extra_css: [ "photoswipe/photoswipe" ]
     image_paths: PhotoFileUtils.composited_images(true)
+
 
 # FIXME/ahao This global state is no bueno.
 State = image_src_list: []
@@ -75,8 +76,9 @@ io.sockets.on "connection", (websocket) ->
     compositer.on "composited", (output_file_path) ->
       console.log "Finished compositing image. Output image is at ", output_file_path
       websocket.broadcast.emit "composited_image", PhotoFileUtils.photo_path_to_url(output_file_path)
-      State.image_src_list = []
-
+      # Lbarker Send output path file to client
+      websocket.emit 'composited',
+        output_file_path: output_file_path
       # Control this with PRINTER=true or PRINTER=false
       if process.env.PRINTER_ENABLED is "true"
         console.log "Printing image at ", output_file_path
@@ -85,4 +87,13 @@ io.sockets.on "connection", (websocket) ->
 
     compositer.on "generated_thumb", (thumb_path) ->
       websocket.broadcast.emit "generated_thumb", PhotoFileUtils.photo_path_to_url(thumb_path)
+
+
+
+
+#io.sockets.on('connection', function (socket) {
+  #websocket.on('ferret', function (name, fn) {
+    #fn('woot');
+  #});
+#});
 

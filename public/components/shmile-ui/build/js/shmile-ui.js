@@ -161,20 +161,21 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       onenterreview_composited: function(e, f, t) {
         self.socket.emit('composite');
         self.photoView.showOverlay(true);
-        setTimeout(function() {
-          self.fsm.next_set()
-        }, self.config.next_delay);
+        //setTimeout(function() {
+        //  self.fsm.next_set()
+        //}, self.config.next_delay);
+        $("#form").load("/templates/webform.html");
+        $("#form").removeClass("hide");
+        //socket.on('composited_image', function(output_file_path) {
+        //    alert('The server has a message for you: ' + output_file_path);
+         //   console.log("tweet from", output_file_path);
+
+        //})
         
       },
       onleavereview_composited: function(e, f, t, data) {
-        socket.on('composited_image', function(url) {
-          console.log('generated_thumb evt: '+url);
-          var url = $url;
-        });
-        $("#form").load("/templates/webform.html");
-        $("#form").removeClass("hide");
-        alert('AHHHHHH');
-
+       
+        
         // Clean up
         //self.photoView.animate('out');
         //self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
@@ -186,6 +187,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         console.log('fsm received event '+ e +', changing state from ' + f + ' to ' + t)
       }
 
+      
     }
   });
 }
@@ -278,6 +280,7 @@ SocketLayer.prototype.register = function(fsm) {
     console.log('photo_saved evt: ' + data.filename);
     self.fsm.photo_saved(data);
   });
+
 }
 
 var PhotoView = Backbone.View.extend({
