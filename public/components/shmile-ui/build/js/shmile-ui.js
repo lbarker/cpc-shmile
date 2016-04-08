@@ -15,9 +15,9 @@ CameraUtils.snap = function(idx, cheeseCb) {
   p.zoomFrame(idx, 'in');
   // These guys need to be promises.
   p.modalMessage('Ready?', Config.ready_delay, 200, function() {
-    p.modalMessage("3", 800, 200, function() {
-      p.modalMessage("2", 800, 200,  function() {
-        p.modalMessage("1", 800, 200, function() {
+    p.modalMessage("3", 400, 200, function() {
+      p.modalMessage("2", 400, 200,  function() {
+        p.modalMessage("1", 400, 200, function() {
           cheeseCb();
         });
       });
@@ -46,12 +46,12 @@ var Config = {
   photo_margin: 50, // Margin for the composite photo per side
   window_width: $(window).width(),
   window_height: $(window).height() - 10,
-  overlay_delay: 2000,
-  next_delay: 2000,
-  cheese_delay: 400,
-  flash_duration: 1000,
-  ready_delay: 800,
-  nice_delay: 5000,
+  overlay_delay: 1000,
+  next_delay: 1000,
+  cheese_delay: 100,
+  flash_duration: 500,
+  ready_delay: 400,
+  nice_delay: 2000,
 
   // The amount of time we should pause between each frame shutter
   // I tend to bump this up when 1) photobooth participants want more
@@ -161,28 +161,24 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       onenterreview_composited: function(e, f, t) {
         self.socket.emit('composite');
         self.photoView.showOverlay(true);
-        //setTimeout(function() {
-        //  self.fsm.next_set()
-        //}, self.config.next_delay);
+        
         $("#form").load("/templates/webform.html");
         $("#form").removeClass("hide");
+        //setTimeout(function() {
+        //  self.fsm.next_set();
+        //  $("#form").addClass("hide");
 
-        // Lbarker - Get data form websocket
-        self.socket.on('composited');
-        //Lbarker - data not available for alert- sad face
-        alert('My image path!: ' + output_file_path);
-
-        //})
+        //}, self.config.next_delay);
         
       },
       onleavereview_composited: function(e, f, t, data) {
        
         
         // Clean up
-        //self.photoView.animate('out');
-        //self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
-          //self.photoView.slideInNext();
-        //});
+        self.photoView.animate('out');
+        self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
+          self.photoView.slideInNext();
+        });
 
       },
       onchangestate: function(e, f, t) {
@@ -285,8 +281,14 @@ SocketLayer.prototype.register = function(fsm) {
 
   // Lbarker - Maybe I need to define the socket here?
   this.proxy.on('composited', function(data) {
-    console.log('composited image evt: ' + data.output_file_path);
-    var output_file_path = output_file_path
+    console.log('composited image evt: ' + data.client_file_path);
+    var client_file_path = data.client_file_path;
+    var oldImg = document.getElementById('outputed-image');
+    var newImg = new Image();
+    newImg.src = client_file_path;
+    newImg.id = 'outputed-image';
+    oldImg.parentNode.replaceChild(newImg, oldImg);
+        
   });
 
 }

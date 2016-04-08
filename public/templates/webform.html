@@ -34,11 +34,9 @@
 					<span class="error-message"></span>
 				</div><!-- / controls -->
 			</div><!-- /simform-inner -->
-			<span class="final-message"></span>
+			<div id="final-message"></div>
 		</form><!-- /simform -->
-
-		<!-- Lbarker- This needs to be the src=output_file_path -->
-		<img src="temp/out.jpg" class="outputed-image"/>
+		<img src="#" id="outputed-image"/>
 	</section>
 
 	
@@ -61,7 +59,7 @@
 			// let's just simulate something...
 			var messageEl = theForm.querySelector( '.final-message' );
 			// Lbarker- Message will should include the final composited image path - or even better - just the name! 
-			messageEl.innerHTML = 'Thank you! Pick up your photo at Print & Copy, your ID# is <% image name %>. We\'ve also emailed you a copy!';
+			messageEl.innerHTML = 'Thank you! Pick up your photo at Print & Copy, your ID# is <% image name %>. We\'ve also emailed you a copy! <a href="#"> Finish</a>';
 			classie.addClass( messageEl, 'show' );
 		}
 	} );

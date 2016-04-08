@@ -73,12 +73,13 @@ io.sockets.on "connection", (websocket) ->
   websocket.on "composite", ->
     compositer = new ImageCompositor(State.image_src_list).init()
     compositer.emit "composite"
-    compositer.on "composited", (output_file_path) ->
-      console.log "Finished compositing image. Output image is at ", output_file_path
+    compositer.on "composited", (output_file_path, client_file_path) ->
+      console.log "Finished compositing image. Cleint output image is at ", client_file_path
       websocket.broadcast.emit "composited_image", PhotoFileUtils.photo_path_to_url(output_file_path)
       # Lbarker Send output path file to client
       websocket.emit 'composited',
         output_file_path: output_file_path
+        client_file_path: client_file_path
       # Control this with PRINTER=true or PRINTER=false
       if process.env.PRINTER_ENABLED is "true"
         console.log "Printing image at ", output_file_path
