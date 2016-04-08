@@ -36,6 +36,8 @@
 			</div><!-- /simform-inner -->
 			<span class="final-message"></span>
 		</form><!-- /simform -->
+
+		<!-- Lbarker- This needs to be the src=output_file_path -->
 		<img src="temp/out.jpg" class="outputed-image"/>
 	</section>
 
@@ -53,12 +55,16 @@
 			form.submit()
 			or
 			AJAX request (maybe show loading indicator while we don't have an answer..)
+			Lbakrer - Need to send data to local database here
 			*/
 
 			// let's just simulate something...
 			var messageEl = theForm.querySelector( '.final-message' );
-			messageEl.innerHTML = 'Thank you! Pick up your photo at Print & Copy, your ID# is XXXXXX. We\'ve also emailed you a copy!';
+			// Lbarker- Message will should include the final composited image path - or even better - just the name! 
+			messageEl.innerHTML = 'Thank you! Pick up your photo at Print & Copy, your ID# is <% image name %>. We\'ve also emailed you a copy!';
 			classie.addClass( messageEl, 'show' );
 		}
 	} );
+
+
 </script>	

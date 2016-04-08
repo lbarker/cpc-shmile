@@ -166,9 +166,11 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         //}, self.config.next_delay);
         $("#form").load("/templates/webform.html");
         $("#form").removeClass("hide");
-        //socket.on('composited_image', function(output_file_path) {
-        //    alert('The server has a message for you: ' + output_file_path);
-         //   console.log("tweet from", output_file_path);
+
+        // Lbarker - Get data form websocket
+        self.socket.on('composited');
+        //Lbarker - data not available for alert- sad face
+        alert('My image path!: ' + output_file_path);
 
         //})
         
@@ -279,6 +281,12 @@ SocketLayer.prototype.register = function(fsm) {
   this.proxy.on('photo_saved', function(data) {
     console.log('photo_saved evt: ' + data.filename);
     self.fsm.photo_saved(data);
+  });
+
+  // Lbarker - Maybe I need to define the socket here?
+  this.proxy.on('composited', function(data) {
+    console.log('composited image evt: ' + data.output_file_path);
+    var output_file_path = output_file_path
   });
 
 }
