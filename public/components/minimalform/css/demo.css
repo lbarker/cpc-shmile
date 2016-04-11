@@ -145,3 +145,11 @@
 	margin:1em auto;
 }
 
+a#finish-photobooth {
+	margin-top:50px;
+	background:(0,0,0,.7);
+	border:solid 1px #035642;
+	padding:50px;
+	color:#fff;
+	border-radius: 5px;
+}

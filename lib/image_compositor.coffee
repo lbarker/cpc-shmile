@@ -59,7 +59,7 @@ class ImageCompositor
           emitter.emit "composited", FINAL_OUTPUT_PATH, CLIENT_OUTPUT_PATH
           doGenerateThumb()
 
-      resizeCompressArgs = [ "-size", "25%", "-quality", "20", FINAL_OUTPUT_PATH, FINAL_OUTPUT_THUMB_PATH ]
+      resizeCompressArgs = [ "-resize", "25%", "-quality", "20", FINAL_OUTPUT_PATH, FINAL_OUTPUT_THUMB_PATH ]
       doGenerateThumb = =>
         im.convert resizeCompressArgs, (e, out, err) ->
           throw err  if err

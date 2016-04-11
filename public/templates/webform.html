@@ -3,6 +3,7 @@
 	<header class="cpc-header clearfix">
 		<div class="title">
 			<h1>Want this memeory?  <span>Fill out the form below</span></h1>	
+			
 		</div>
 		<div class="logo">
 
@@ -11,16 +12,16 @@
 	</header>
 	
 	<section>
-		<form id="theForm" class="simform" autocomplete="off" action="/data" method="POST">
+		<form id="theForm" class="simform" autocomplete="off">
 			<div class="simform-inner">
 				<ol class="questions">
 					<li>
 						<span><label for="q1">What's your name?</label></span>
-						<input id="q1" name="q1" type="text"/>
+						<input id="name" name="name" type="text"/>
 					</li>
 					<li>
 						<span><label for="q2">What's your email?</label></span>
-						<input id="q2" name="q2" type="text"/>
+						<input id="email" name="email" type="email"/>
 					</li>
 				</ol><!-- /questions -->
 				<button class="submit" type="submit">Send answers</button>
@@ -34,9 +35,12 @@
 					<span class="error-message"></span>
 				</div><!-- / controls -->
 			</div><!-- /simform-inner -->
-			<div id="final-message"></div>
+			<span class="final-message"></span>
 		</form><!-- /simform -->
+
+		<!-- Lbarker- This needs to be the src=output_file_path -->
 		<img src="#" id="outputed-image"/>
+
 	</section>
 
 	
@@ -44,24 +48,76 @@
 
 <script>
 	var theForm = document.getElementById( 'theForm' );
+	var request;
 	new stepsForm( theForm, {
 		onSubmit : function( form ) {
 			// hide form
 			classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
 
-			/*
-			form.submit()
-			or
-			AJAX request (maybe show loading indicator while we don't have an answer..)
-			Lbakrer - Need to send data to local database here
-			*/
+			/* Submit form to google docs */
+			 // Abort any pending request
+			    if (request) {
+			        request.abort();
+			    }
+			    // setup some local variables
+			    var $form = $(theForm);
+
+			    // Let's select and cache all the fields
+			    var $inputs = $form.find("input, select, button, textarea");
+
+			    // Serialize the data in the form
+			    var serializedData = $form.serialize();
+
+			    // Let's disable the inputs for the duration of the Ajax request.
+			    // Note: we disable elements AFTER the form data has been serialized.
+			    // Disabled form elements will not be serialized.
+			    $inputs.prop("disabled", true);
+
+			    // Fire off the request to /form.php
+			    request = $.ajax({
+			        url: "https://script.google.com/macros/s/AKfycbyNVZgYij9DJMhtwFWP6IzJswtu2Em49h8SRYhJzrlzzPq-09Rc/exec",
+			        type: "post",
+			        data: serializedData
+			    });
+
+			    // Callback handler that will be called on success
+			    request.done(function (response, textStatus, jqXHR){
+			        // Log a message to the console
+			        console.log("Hooray, it worked!");
+			        console.log(response);
+			        console.log(textStatus);
+			        console.log(jqXHR);
+			    });
+
+			    // Callback handler that will be called on failure
+			    request.fail(function (jqXHR, textStatus, errorThrown){
+			        // Log the error to the console
+			        console.error(
+			            "The following error occurred: "+
+			            textStatus, errorThrown
+			        );
+			    });
+
+			    // Callback handler that will be called regardless
+			    // if the request failed or succeeded
+			    request.always(function () {
+			        // Reenable the inputs
+			        $inputs.prop("disabled", false);
+			    });
+
+			    // Prevent default posting of form
+			    event.preventDefault();
 
 			// let's just simulate something...
 			var messageEl = theForm.querySelector( '.final-message' );
 			// Lbarker- Message will should include the final composited image path - or even better - just the name! 
-			messageEl.innerHTML = 'Thank you! Pick up your photo at Print & Copy, your ID# is <% image name %>. We\'ve also emailed you a copy! <a href="#"> Finish</a>';
+			messageEl.innerHTML = 'Thank you! Pick up your photo at Print & Copy, your ID# is <span id="image-id"></span>We\'ve also emailed you a copy! <a href="#" id="finish-photobooth">Finish</a>';
 			classie.addClass( messageEl, 'show' );
+			// hide form
+			$("#outputed-image").addClass("hide");
 		}
+
+
 	} );
 
 

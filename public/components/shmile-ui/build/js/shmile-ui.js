@@ -164,12 +164,18 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         
         $("#form").load("/templates/webform.html");
         $("#form").removeClass("hide");
-        //setTimeout(function() {
-        //  self.fsm.next_set();
-        //  $("#form").addClass("hide");
 
-        //}, self.config.next_delay);
+
+        $(document).on("click", "#finish-photobooth" , function() {
+          setTimeout(function() {
+            self.fsm.next_set();
+            $("#form").addClass("hide");
+
+          }, self.config.next_delay);
+        });
+
         
+
       },
       onleavereview_composited: function(e, f, t, data) {
        
@@ -288,7 +294,6 @@ SocketLayer.prototype.register = function(fsm) {
     newImg.src = client_file_path;
     newImg.id = 'outputed-image';
     oldImg.parentNode.replaceChild(newImg, oldImg);
-        
   });
 
 }

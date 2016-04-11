@@ -76,9 +76,10 @@ io.sockets.on "connection", (websocket) ->
     compositer.on "composited", (output_file_path, client_file_path) ->
       console.log "Finished compositing image. Cleint output image is at ", client_file_path
       websocket.broadcast.emit "composited_image", PhotoFileUtils.photo_path_to_url(output_file_path)
+      State.image_src_list = []
+
       # Lbarker Send output path file to client
       websocket.emit 'composited',
-        output_file_path: output_file_path
         client_file_path: client_file_path
       # Control this with PRINTER=true or PRINTER=false
       if process.env.PRINTER_ENABLED is "true"
@@ -88,13 +89,4 @@ io.sockets.on "connection", (websocket) ->
 
     compositer.on "generated_thumb", (thumb_path) ->
       websocket.broadcast.emit "generated_thumb", PhotoFileUtils.photo_path_to_url(thumb_path)
-
-
-
-
-#io.sockets.on('connection', function (socket) {
-  #websocket.on('ferret', function (name, fn) {
-    #fn('woot');
-  #});
-#});
 
