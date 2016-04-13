@@ -35,12 +35,16 @@
 					<span class="error-message"></span>
 				</div><!-- / controls -->
 			</div><!-- /simform-inner -->
-			<span class="final-message"></span>
+			<span class="final-message">
+				Thank you! Pick up your photo at Print &amp; Copy, your ID# is <span id="image-id"></span>
+			</span>
 		</form><!-- /simform -->
 
 		<!-- Lbarker- This needs to be the src=output_file_path -->
-		<img src="#" id="outputed-image"/>
-
+		<div id="output-image-container" class="fadeout">
+			<img src="#" id="outputed-image"/>
+		</div>
+		<a href="#" id="finish-photobooth" class="fadeout superlarge awesome">Finish</a>
 	</section>
 
 	
@@ -49,8 +53,16 @@
 <script>
 	var theForm = document.getElementById( 'theForm' );
 	var request;
+	setTimeout(function(){
+	   $("#output-image-container").removeClass("fadeout").addClass("fadein");
+
+	}, 1500);
+	
+	
+
 	new stepsForm( theForm, {
 		onSubmit : function( form ) {
+			$('input#email').blur();
 			// hide form
 			classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
 
@@ -111,10 +123,10 @@
 			// let's just simulate something...
 			var messageEl = theForm.querySelector( '.final-message' );
 			// Lbarker- Message will should include the final composited image path - or even better - just the name! 
-			messageEl.innerHTML = 'Thank you! Pick up your photo at Print & Copy, your ID# is <span id="image-id"></span>We\'ve also emailed you a copy! <a href="#" id="finish-photobooth">Finish</a>';
 			classie.addClass( messageEl, 'show' );
 			// hide form
-			$("#outputed-image").addClass("hide");
+			$("#finish-photobooth").removeClass("fadeout").addClass("fadein");
+			$("#output-image-container").addClass("hide");
 		}
 
 

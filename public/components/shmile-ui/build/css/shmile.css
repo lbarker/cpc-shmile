@@ -20,6 +20,10 @@ section#form{
     position:absolute;
     top:0;
     right:0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 
@@ -36,7 +40,7 @@ button#start-button {
 }
 
 .awesome, .awesome:visited {
-    background: #222 url(/images/alert-overlay.png) repeat-x; 
+    background: #222; 
     display: inline-block; 
     padding: 5px 10px 6px; 
     color: #fff; 
@@ -64,6 +68,6 @@ button#start-button {
 }
 .boinkyellow.awesome, .boinkyellow.awesome:visited        { background-color: #F5BE1B; }
 .boinkyellow.awesome:hover                           { background-color: #fc9200; }
-.boinkcpgreenbright.awesome, .boinkcpgreenbright.awesome:visited        { background-color: #427730; }
-.boinkcpgreenbright.awesome:hover                           { background-color: #58a618; }
+.boinkcpgreenbright.awesome, .boinkcpgreenbright.awesome:visited        { background-color: #035642; }
+.boinkcpgreenbright.awesome:hover                           { background-color: #427730; }
 

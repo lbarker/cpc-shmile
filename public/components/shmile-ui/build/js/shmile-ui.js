@@ -15,9 +15,9 @@ CameraUtils.snap = function(idx, cheeseCb) {
   p.zoomFrame(idx, 'in');
   // These guys need to be promises.
   p.modalMessage('Ready?', Config.ready_delay, 200, function() {
-    p.modalMessage("3", 400, 200, function() {
-      p.modalMessage("2", 400, 200,  function() {
-        p.modalMessage("1", 400, 200, function() {
+    p.modalMessage("3", 800, 200, function() {
+      p.modalMessage("2", 800, 200,  function() {
+        p.modalMessage("1", 800, 200, function() {
           cheeseCb();
         });
       });
@@ -46,21 +46,21 @@ var Config = {
   photo_margin: 50, // Margin for the composite photo per side
   window_width: $(window).width(),
   window_height: $(window).height() - 10,
-  overlay_delay: 1000,
+  overlay_delay: 2000,
   next_delay: 1000,
-  cheese_delay: 100,
-  flash_duration: 500,
-  ready_delay: 400,
+  cheese_delay: 500,
+  flash_duration: 100,
+  ready_delay: 800,
   nice_delay: 2000,
 
   // The amount of time we should pause between each frame shutter
   // I tend to bump this up when 1) photobooth participants want more
   // time to review their photos between shots, and 2) when I'm shooting
   // with external flash and the flash needs more time to recharge.
-  between_snap_delay: 500,
+  between_snap_delay: 1000,
 
   // For usability enhancements on iPad, set this to "true"
-  is_mobile: false
+  is_mobile: true
 }
 
 /**
@@ -131,8 +131,11 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       onenterwaiting_for_photo: function(e) {
         cheeseCb = function() {
           self.photoView.modalMessage('Cheese!', self.config.cheese_delay);
-          self.photoView.flashStart();
-          self.socket.emit('snap', true);
+          setTimeout(function() {
+            self.photoView.flashStart();
+            self.socket.emit('snap', true);
+          }, 300)
+
         }
         CameraUtils.snap(self.appState.current_frame_idx, cheeseCb);
       },
@@ -159,32 +162,38 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         }
       },
       onenterreview_composited: function(e, f, t) {
-        self.socket.emit('composite');
         self.photoView.showOverlay(true);
-        
-        $("#form").load("/templates/webform.html");
-        $("#form").removeClass("hide");
-
-
-        $(document).on("click", "#finish-photobooth" , function() {
-          setTimeout(function() {
+        setTimeout(function() {
+          self.photoView.animate('out');
+          self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
             self.fsm.next_set();
-            $("#form").addClass("hide");
+          });
+        }, 10000);
+         // Clean up
+              
 
-          }, self.config.next_delay);
-        });
-
-        
+      
 
       },
       onleavereview_composited: function(e, f, t, data) {
-       
+          self.socket.emit('composite');
+          $("#form").load("/templates/webform.html");
+          $("#form").removeClass("fadeout").addClass("fadein");
+
+          $(document).on("click", "#finish-photobooth" , function() {
+
+              $("#form").removeClass("fadein").addClass("fadeout");
+
+              // Clean up
+              self.photoView.modalMessage('Thanks!', self.config.nice_delay, 200, function() {
+                self.photoView.slideInNext();
+              });
+
+          });
+
+
         
-        // Clean up
-        self.photoView.animate('out');
-        self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
-          self.photoView.slideInNext();
-        });
+        
 
       },
       onchangestate: function(e, f, t) {
@@ -289,11 +298,14 @@ SocketLayer.prototype.register = function(fsm) {
   this.proxy.on('composited', function(data) {
     console.log('composited image evt: ' + data.client_file_path);
     var client_file_path = data.client_file_path;
+    var cpc_id = data.cpc_id;
     var oldImg = document.getElementById('outputed-image');
     var newImg = new Image();
     newImg.src = client_file_path;
     newImg.id = 'outputed-image';
     oldImg.parentNode.replaceChild(newImg, oldImg);
+    $("#image-id").text(cpc_id);
+
   });
 
 }
@@ -536,24 +548,24 @@ var PhotoView = Backbone.View.extend({
    * Faux camera flash
    */
   flashEffect: function(duration) {
-    if (duration === undefined) { duration = 200; }
+    if (duration === undefined) { duration = 100; }
     var rect = this.canvas.rect(0, 0, this.config.window_width, this.config.window_height);
     rect.attr({'fill': 'white', 'opacity': 0});
-    rect.animate({'opacity': 1}, duration, ">", function() {
+    rect.animate({'opacity': .8}, duration, ">", function() {
       rect.animate({'opacity': 0}, duration, "<");
       rect.remove();
     })
   },
 
   flashStart: function(duration) {
-    if (duration === undefined) { duration = 200; }
+    if (duration === undefined) { duration = 100; }
     this.rect = this.canvas.rect(0, 0, this.config.window_width, this.config.window_height);
     this.rect.attr({'fill': 'white', 'opacity': 0});
-    this.rect.animate({'opacity': 1}, duration, ">")
+    this.rect.animate({'opacity': .8}, duration, ">")
   },
 
   flashEnd: function(duration) {
-    if (duration === undefined) { duration = 200; }
+    if (duration === undefined) { duration = 100; }
     var self = this;
     this.rect.animate({'opacity': 0}, duration, "<", function() {
       self.remove();

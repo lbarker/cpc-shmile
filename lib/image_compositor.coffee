@@ -29,6 +29,7 @@ class ImageCompositor
       IMAGE_GEOMETRY = "#{IMAGE_WIDTH}x#{IMAGE_HEIGHT}"
       OUTPUT_PATH = "#{@opts.tmp_dir}/out.jpg"
       OUTPUT_FILE_NAME = "#{utcSeconds}.jpg"
+      CPC_ID = "#{utcSeconds}"
       FINAL_OUTPUT_PATH = "#{@opts.output_dir}/gen_#{OUTPUT_FILE_NAME}"
       FINAL_OUTPUT_THUMB_PATH = "#{@opts.thumb_dir}/thumb_#{OUTPUT_FILE_NAME}"
       CLIENT_OUTPUT_PATH = "/photos/generated/gen_#{OUTPUT_FILE_NAME}"
@@ -56,7 +57,7 @@ class ImageCompositor
         console.log("executing: composite " + compositeArgs.join(" "))
         exec "composite " + compositeArgs.join(" "), (error, stderr, stdout) ->
           throw error  if error
-          emitter.emit "composited", FINAL_OUTPUT_PATH, CLIENT_OUTPUT_PATH
+          emitter.emit "composited", FINAL_OUTPUT_PATH, CLIENT_OUTPUT_PATH, CPC_ID
           doGenerateThumb()
 
       resizeCompressArgs = [ "-resize", "25%", "-quality", "20", FINAL_OUTPUT_PATH, FINAL_OUTPUT_THUMB_PATH ]

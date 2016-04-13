@@ -1,0 +1,15 @@
+2016-04-12 15:12:32: Disable Copy original filesystem names option. CPC Photo Booth's sides are not support it.
+2016-04-12 15:12:32: -- Analysis Started by On File Change 1st Full Analyze
+2016-04-12 15:12:32: L: State file does not exist: /Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/_gsdata_/_file_state_v4._gs
+2016-04-12 15:12:32: R: State file does not exist: /Volumes/MRKTMedia1/photobooth_shmile/_gsdata_/_file_state_v4._gs
+2016-04-12 15:12:32: Changes: 3, Conflicts: 0, CopyTime: 0, CopyState: 0/0, Errors: 0, All: 6
+2016-04-12 15:12:32: Left to Right: Copy File: 3 
+2016-04-12 15:12:32: == Sync Started by On File Change 1st Full Analyze
+2016-04-12 15:12:32: Create Folder '/Volumes/MRKTMedia1/photobooth_shmile/thumbs'
+2016-04-12 15:12:32: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/.gitkeep' -> '/Volumes/MRKTMedia1/photobooth_shmile/.gitkeep'
+2016-04-12 15:12:32: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/thumbs/.gitkeep' -> '/Volumes/MRKTMedia1/photobooth_shmile/thumbs/.gitkeep'
+2016-04-12 15:12:32: == Sync Complete. Time: 00:00:00, Speed: 0.0/s, OK: 3, Errors: 0
+2016-04-12 15:12:33: -- Analysis Started by On File Change PostSync Re-Analyze
+2016-04-12 15:12:33: Changes: 0, Conflicts: 0, CopyTime: 0, CopyState: 0/0, Errors: 0, All: 6
+2016-04-12 15:12:33: -- Analysis Complete. Time 00:00:01, Speed: 6 files/s
+2016-04-12 15:12:33: 
