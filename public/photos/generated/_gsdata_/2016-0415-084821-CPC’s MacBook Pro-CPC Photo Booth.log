@@ -1,0 +1,10 @@
+2016-04-15 08:48:22: -- Analysis Started by On File Change Incremental
+2016-04-15 08:48:22: Changes: 4, Conflicts: 0, CopyTime: 0, CopyState: 0/0, Errors: 0, All: 104
+2016-04-15 08:48:22: Left to Right: Copy File: 4 
+2016-04-15 08:48:22: == Sync Started by On File Change Incremental
+2016-04-15 08:48:22: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/gen_1460735298614.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/gen_1460735298614.jpg'
+2016-04-15 08:48:22: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/gen_1460735298848.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/gen_1460735298848.jpg'
+2016-04-15 08:48:22: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/thumbs/thumb_1460735298614.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/thumbs/thumb_1460735298614.jpg'
+2016-04-15 08:48:22: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/thumbs/thumb_1460735298848.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/thumbs/thumb_1460735298848.jpg'
+2016-04-15 08:48:23: == Sync Complete. Time: 00:00:01, Speed: 0.0/s, OK: 4, Errors: 0
+2016-04-15 08:48:24: 
