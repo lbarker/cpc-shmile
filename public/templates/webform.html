@@ -44,7 +44,7 @@
 		<div id="output-image-container" class="fadeout">
 			<img src="#" id="outputed-image"/>
 		</div>
-		<a href="#" id="finish-photobooth" class="fadeout superlarge awesome">Finish</a>
+		<a href="#" id="finish-photobooth" class="fadeout hide superlarge awesome">Finish</a>
 	</section>
 
 	
@@ -54,8 +54,8 @@
 	var theForm = document.getElementById( 'theForm' );
 	var request;
 	setTimeout(function(){
-	   $("#output-image-container").removeClass("fadeout").addClass("fadein");
-
+	   $("#output-image-container").removeClass("hide").removeClass("fadeout").addClass("fadein");
+	   $("#finish-photobooth").addClass("hide");
 	}, 1500);
 	
 	
@@ -125,7 +125,7 @@
 			// Lbarker- Message will should include the final composited image path - or even better - just the name! 
 			classie.addClass( messageEl, 'show' );
 			// hide form
-			$("#finish-photobooth").removeClass("fadeout").addClass("fadein");
+			$("#finish-photobooth").removeClass("hide").removeClass("fadeout").addClass("fadein");
 			$("#output-image-container").addClass("hide");
 		}
 
