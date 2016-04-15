@@ -175,7 +175,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
           
         }, self.config.next_delay);
       },
-      onleavereview_composited: function(e, f, t) {
+      onleavereview_composited: function(e, f, t, data) {
         // Clean up
         self.photoView.animate('out');
         self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
