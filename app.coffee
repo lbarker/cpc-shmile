@@ -30,12 +30,12 @@ exp.configure ->
 
 exp.get "/", (req, res) ->
   res.render "index",
-    title: "shmile"
+    title: "CPC Shmile"
     extra_css: []
 
 exp.get "/gallery", (req, res) ->
   res.render "gallery",
-    title: "gallery!"
+    title: "CPC Gallery!"
     extra_css: [ "photoswipe/photoswipe" ]
     image_paths: PhotoFileUtils.composited_images(true)
 

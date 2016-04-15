@@ -51,7 +51,7 @@ var Config = {
   cheese_delay: 500,
   flash_duration: 100,
   ready_delay: 800,
-  nice_delay: 2000,
+  nice_delay: 10000,
 
   // The amount of time we should pause between each frame shutter
   // I tend to bump this up when 1) photobooth participants want more
@@ -177,8 +177,9 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       },
       onleavereview_composited: function(e, f, t, data) {
         // Clean up
-        self.photoView.animate('out');
+        
         self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
+          self.photoView.animate('out');
           self.photoView.slideInNext();
         });
       },
