@@ -15,9 +15,9 @@ CameraUtils.snap = function(idx, cheeseCb) {
   p.zoomFrame(idx, 'in');
   // These guys need to be promises.
   p.modalMessage('Ready?', Config.ready_delay, 200, function() {
-    p.modalMessage("3", 800, 200, function() {
-      p.modalMessage("2", 800, 200,  function() {
-        p.modalMessage("1", 800, 200, function() {
+    p.modalMessage("3", 400, 100, function() {
+      p.modalMessage("2", 400, 100,  function() {
+        p.modalMessage("1", 400, 100, function() {
           cheeseCb();
         });
       });
@@ -60,7 +60,7 @@ var Config = {
   between_snap_delay: 1000,
 
   // For usability enhancements on iPad, set this to "true"
-  is_mobile: true
+  is_mobile: false
 }
 
 /**
@@ -291,7 +291,8 @@ SocketLayer.prototype.register = function(fsm) {
     newImg.id = 'outputed-image';
     oldImg.parentNode.replaceChild(newImg, oldImg);
     $("#image-id").text(cpc_id);
-
+    $("#photoid").value = cpc_id;
+    document.getElementById('photoid').value=cpc_id;
   });
 
 }
