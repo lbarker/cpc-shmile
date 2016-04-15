@@ -51,7 +51,7 @@ var Config = {
   cheese_delay: 500,
   flash_duration: 100,
   ready_delay: 800,
-  nice_delay: 10000,
+  nice_delay: 1000,
 
   // The amount of time we should pause between each frame shutter
   // I tend to bump this up when 1) photobooth participants want more
@@ -60,7 +60,7 @@ var Config = {
   between_snap_delay: 1000,
 
   // For usability enhancements on iPad, set this to "true"
-  is_mobile: false
+  is_mobile: true
 }
 
 /**
@@ -177,11 +177,12 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       },
       onleavereview_composited: function(e, f, t, data) {
         // Clean up
-        
-        self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
-          self.photoView.animate('out');
-          self.photoView.slideInNext();
-        });
+        setTimeout(function() {
+          self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
+            self.photoView.animate('out');
+            self.photoView.slideInNext();
+          });
+         }, 10000);
       },
       onchangestate: function(e, f, t) {
         console.log('fsm received event '+ e +', changing state from ' + f + ' to ' + t)
