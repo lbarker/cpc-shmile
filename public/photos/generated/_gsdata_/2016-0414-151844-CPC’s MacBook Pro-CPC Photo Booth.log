@@ -1,0 +1,17 @@
+2016-04-14 15:18:45: -- Analysis Started by On File Change 1st Full Analyze
+2016-04-14 15:18:45: Changes: 8, Conflicts: 0, CopyTime: 0, CopyState: 0/0, Errors: 0, All: 56
+2016-04-14 15:18:45: Left to Right: Copy File: 8 
+2016-04-14 15:18:45: == Sync Started by On File Change 1st Full Analyze
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/gen_1460668972269.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/gen_1460668972269.jpg'
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/gen_1460670623691.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/gen_1460670623691.jpg'
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/gen_1460671323861.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/gen_1460671323861.jpg'
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/gen_1460671938312.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/gen_1460671938312.jpg'
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/thumbs/thumb_1460668972269.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/thumbs/thumb_1460668972269.jpg'
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/thumbs/thumb_1460670623691.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/thumbs/thumb_1460670623691.jpg'
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/thumbs/thumb_1460671323861.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/thumbs/thumb_1460671323861.jpg'
+2016-04-14 15:18:46: Copy New '/Users/lbarker/Documents/htdocs/cpc-shmile/public/photos/generated/thumbs/thumb_1460671938312.jpg' -> '/Volumes/MRKTMedia1/photobooth_shmile/thumbs/thumb_1460671938312.jpg'
+2016-04-14 15:18:46: == Sync Complete. Time: 00:00:01, Speed: 6.8 MB/s, OK: 8, Errors: 0
+2016-04-14 15:18:47: -- Analysis Started by On File Change PostSync Re-Analyze
+2016-04-14 15:18:47: Changes: 0, Conflicts: 0, CopyTime: 0, CopyState: 0/0, Errors: 0, All: 56
+2016-04-14 15:18:47: -- Analysis Complete. Time 00:00:02, Speed: 28 files/s
+2016-04-14 15:18:47: 

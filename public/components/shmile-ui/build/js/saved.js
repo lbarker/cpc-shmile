@@ -73,6 +73,7 @@ var AppState = function() {
 AppState.prototype.reset = function() {
   this.current_frame_idx = 0;
   this.zoomed = null;
+  this.startover = 0
 }
 
 
@@ -115,7 +116,8 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       { name: 'photo_updated', from: 'review_photo', to: 'next_photo' },
       { name: 'continue_partial_set', from: 'next_photo', to: 'waiting_for_photo' },
       { name: 'finish_set', from: 'next_photo', to: 'review_composited' },
-      { name: 'next_set', from: 'review_composited', to: 'ready'}
+      { name: 'next_set', from: 'review_composited', to: 'ready'},
+      { name: 'start_over', from: 'leave_review', to: 'ready'}
     ],
     callbacks: {
       onconnected: function() {
@@ -164,24 +166,41 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       onenterreview_composited: function(e, f, t) {
         self.photoView.showOverlay(true);
         $("#get-info").removeClass("fadeout").addClass("fadein");
-        $(document).on("click", "#get-info" , function() {
-          $("#get-info").removeClass("fadein").addClass("fadeout");
+        $("#start-over").removeClass("fadeout").addClass("fadein");
 
+        $(document).on("click", "#get-info" , function() {
           self.photoView.animate('out');
           self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
             self.fsm.next_set();
           });
         });
-              
+        $(document).on("click", "#start-over" , function() {
+          self.photoView.animate('out');
+          self.photoView.modalMessage('Ok!', self.config.nice_delay, 200, function() {
+            self.fsm.next_set();
+            self.appState.startover == 1;
+        });
 
-      
-
+         // Clean up
       },
       onleavereview_composited: function(e, f, t, data) {
+        if (self.appState.startover == 1) {
+          self.socket.emit('composite');
+         
+          
+          // Clean up
+          self.photoView.modalMessage('Thanks!', self.config.nice_delay, 200, function() {
+            self.photoView.slideInNext();
+          });
+
+         
+        } else if {
+
           self.socket.emit('composite');
           $("#form").load("/templates/webform.html");
           $("#form").removeClass("fadeout").addClass("fadein");
-
+          $("#get-info").removeClass("fadein").addClass("fadeout");
+          $("#start-over").removeClass("fadeout").addClass("fadein");
           $(document).on("click", "#finish-photobooth" , function() {
 
               $("#form").removeClass("fadein").addClass("fadeout");
@@ -192,12 +211,9 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
               });
 
           });
-
-
-        
-        
-
+        }
       },
+      
       onchangestate: function(e, f, t) {
         console.log('fsm received event '+ e +', changing state from ' + f + ' to ' + t)
       }
@@ -307,7 +323,6 @@ SocketLayer.prototype.register = function(fsm) {
     newImg.id = 'outputed-image';
     oldImg.parentNode.replaceChild(newImg, oldImg);
     $("#image-id").text(cpc_id);
-
   });
 
 }
