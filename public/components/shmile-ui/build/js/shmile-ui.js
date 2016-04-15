@@ -162,47 +162,31 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         }
       },
       onenterreview_composited: function(e, f, t) {
+        self.socket.emit('composite');
+
         self.photoView.showOverlay(true);
-        $("#get-info").removeClass("fadeout").addClass("fadein");
-        $(document).on("click", "#get-info" , function() {
-          $("#get-info").removeClass("fadein").addClass("fadeout");
-
-          self.photoView.animate('out');
-          self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
-            self.fsm.next_set();
-          });
-        });
-              
-
-      
-
+        setTimeout(function() {
+          self.fsm.next_set()
+        }, self.config.next_delay);
       },
       onleavereview_composited: function(e, f, t, data) {
-          self.socket.emit('composite');
           $("#form").load("/templates/webform.html");
           $("#form").removeClass("fadeout").addClass("fadein");
+          self.photoView.animate('out');
 
           $(document).on("click", "#finish-photobooth" , function() {
 
               $("#form").removeClass("fadein").addClass("fadeout");
 
-              // Clean up
-              self.photoView.modalMessage('Thanks!', self.config.nice_delay, 200, function() {
+              self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
                 self.photoView.slideInNext();
               });
 
           });
-
-
-        
-        
-
       },
       onchangestate: function(e, f, t) {
         console.log('fsm received event '+ e +', changing state from ' + f + ' to ' + t)
       }
-
-      
     }
   });
 }
