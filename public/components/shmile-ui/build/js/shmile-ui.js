@@ -60,7 +60,7 @@ var Config = {
   between_snap_delay: 1000,
 
   // For usability enhancements on iPad, set this to "true"
-  is_mobile: false
+  is_mobile: true
 }
 
 /**
