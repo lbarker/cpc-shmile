@@ -11,7 +11,7 @@ Overlay image has been branded with CP Open House. All colors in user interface 
 After the app has cycled through 4 photos, it now displays MinimalForm while hiding the composited image. This allows CPC to gather user information.
 
 #### Google Spreadsheet for User Data
-User data submited through MinimalForm is stored in google spreadsheet - currently titled CPC_OpenHouse under the calpolycorporation@gmail.com account.
+User data submited through MinimalForm is stored in google spreadsheet.
 Documentation used to create this feature:
 http://railsrescue.com/blog/2015-05-28-step-by-step-setup-to-send-form-data-to-google-sheets/
 
@@ -19,9 +19,9 @@ http://railsrescue.com/blog/2015-05-28-step-by-step-setup-to-send-form-data-to-g
 ### Installation for CPC Event
 
 #### Technology
-All devices need to be connected to the same network - perferable cpc-wifi.
+All devices need to be connected to the same network - perferably cpc-wifi.
 
-Laptop needs to be connected to ethernet to connected to the .93 server. This allows us to sym-link photos from laptop to server so print and copy can grab them. ( this feature was used for OpenHouse)
+Laptop needs to be connected to ethernet to connect to the .93 server. This allows us to sym-link photos from laptop to server so Print&Copy can grab them. ( this feature was used for OpenHouse)
 
 Make sure computer registers camera when you connect it - iPhotos will open. 
 
