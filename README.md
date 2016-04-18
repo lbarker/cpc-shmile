@@ -7,8 +7,9 @@ With a digital camera, a laptop and a printer, CPC can create a DIY low-cost pho
 #### CPC Branded
 Overlay image has been branded with CP Open House. All colors in user interface utilize CPC branding.
 
-#### MinimalForm: https://github.com/codrops/MinimalForm
-After the app has cycled through 4 photos, it now displays MinimalForm while hiding the composited image. This allows CPC to gather user information.
+#### MinimalForm: 
+After the app has cycled through 4 photos, it now displays MinimalForm while hiding the composited image. This allows CPC to gather user information. 
+MinimalForm: https://github.com/codrops/MinimalForm
 
 #### Google Spreadsheet for User Data
 User data submited through MinimalForm is stored in google spreadsheet.
