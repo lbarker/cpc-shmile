@@ -1,11 +1,11 @@
 {
-  "name": "CPC Shile",
+  "name": "CPC Shmile",
   "version": "0.0.1",
-  "homepage": "https://github.com/porkbuns/shmile",
+  "homepage": "",
   "authors": [
-    "Andrew Hao <andrewhao@gmail.com>"
+    "Lauren Barker <lbarker@calpoly.edi>"
   ],
-  "description": "An open source photobooth.",
+  "description": "An open source photobooth created by Andrew Hao <andrewhao@gmail.com>.",
   "main": "app.coffee",
   "keywords": [
     "photobooth"
@@ -18,7 +18,9 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "shmile-ui": "andrewhao/shmile-ui#f5464546679c797636b0dc0bcaecc1b5e6b81bdb"
-  }
+
+  // Shimle-ui not integrated with CPC Shimle version
+  //"dependencies": {
+  //  "shmile-ui": "andrewhao/shmile-ui#f5464546679c797636b0dc0bcaecc1b5e6b81bdb"
+  //}
 }

@@ -1,4 +1,3 @@
-
 /*
  * STATE MACHINE DEFINITION
  * Keep track of app state and logic.
@@ -54,8 +53,11 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
       onenterwaiting_for_photo: function(e) {
         cheeseCb = function() {
           self.photoView.modalMessage('Cheese!', self.config.cheese_delay);
-          self.photoView.flashStart();
-          self.socket.emit('snap', true);
+          setTimeout(function() {
+            self.photoView.flashStart();
+            self.socket.emit('snap', true);
+          }, 300)
+
         }
         CameraUtils.snap(self.appState.current_frame_idx, cheeseCb);
       },
@@ -65,7 +67,7 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
         self.photoView.flashEnd();
         self.photoView.updatePhotoSet(data.web_url, self.appState.current_frame_idx, function() {
           setTimeout(function() {
-            self.fsm.photo_updated();
+            self.fsm.photo_updated()
           }, self.config.between_snap_delay)
         });
       },
@@ -81,39 +83,32 @@ var ShmileStateMachine = function(photoView, socket, appState, config, buttonVie
           self.fsm.continue_partial_set();
         }
       },
+     
       onenterreview_composited: function(e, f, t) {
         self.socket.emit('composite');
         self.photoView.showOverlay(true);
         setTimeout(function() {
-          self.fsm.next_set()
+          $("#form").load("/templates/webform.html");
+          $("#form").removeClass("fadeout").addClass("fadein");
+          $(document).on("click", "#finish-photobooth" , function() {
+              $("#form").removeClass("fadein").addClass("fadeout");
+              self.fsm.next_set();
+          });
+          
         }, self.config.next_delay);
-        
-        
-        
       },
       onleavereview_composited: function(e, f, t, data) {
-        $("#form").load("/templates/webform.html");
-        $("#form").removeClass("hide");
-
-
-        // Lbarker's attempt to fetch data through socket
-        //socket.on('composited_image', function(output_file_path) {
-        //    alert('The server has a message for you: ' + output_file_path);
-        //   console.log("tweet from", output_file_path);
-        //})
-        
         // Clean up
-        //self.photoView.animate('out');
-        //self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
-          //self.photoView.slideInNext();
-        //});
-
+        setTimeout(function() {
+          self.photoView.modalMessage('Nice!', self.config.nice_delay, 200, function() {
+            self.photoView.animate('out');
+            self.photoView.slideInNext();
+          });
+         }, 10000);
       },
       onchangestate: function(e, f, t) {
         console.log('fsm received event '+ e +', changing state from ' + f + ' to ' + t)
       }
-
-      
     }
   });
 }

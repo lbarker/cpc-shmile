@@ -15,9 +15,9 @@ CameraUtils.snap = function(idx, cheeseCb) {
   p.zoomFrame(idx, 'in');
   // These guys need to be promises.
   p.modalMessage('Ready?', Config.ready_delay, 200, function() {
-    p.modalMessage("3", 800, 200, function() {
-      p.modalMessage("2", 800, 200,  function() {
-        p.modalMessage("1", 800, 200, function() {
+    p.modalMessage("3", 600, 200, function() {
+      p.modalMessage("2", 600, 200,  function() {
+        p.modalMessage("1", 600, 200, function() {
           cheeseCb();
         });
       });

@@ -1,3 +1,4 @@
+
 /**
  * Responsible for initializing the connection to socket.io.
  * @param io [Socket]
@@ -46,6 +47,21 @@ SocketLayer.prototype.register = function(fsm) {
   this.proxy.on('photo_saved', function(data) {
     console.log('photo_saved evt: ' + data.filename);
     self.fsm.photo_saved(data);
+  });
+
+  // Lbarker - Maybe I need to define the socket here?
+  this.proxy.on('composited', function(data) {
+    console.log('composited image evt: ' + data.client_file_path);
+    var client_file_path = data.client_file_path;
+    var cpc_id = data.cpc_id;
+    var oldImg = document.getElementById('outputed-image');
+    var newImg = new Image();
+    newImg.src = client_file_path;
+    newImg.id = 'outputed-image';
+    oldImg.parentNode.replaceChild(newImg, oldImg);
+    $("#image-id").text(cpc_id);
+    $("#photoid").value = cpc_id;
+    document.getElementById('photoid').value=cpc_id;
   });
 
 }

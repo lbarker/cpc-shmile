@@ -1,11 +1,30 @@
-# shmile is a nodejs-based photobooth.
+# CPC Shmile is a nodejs-based photobooth derived from Shmile
 
-[![https://gyazo.com/f26fb9f246d92d92b1d4e3f008ba9d7d](https://i.gyazo.com/f26fb9f246d92d92b1d4e3f008ba9d7d.gif)](https://gyazo.com/f26fb9f246d92d92b1d4e3f008ba9d7d)
+With a digital camera, a laptop and a printer, CPC can create a DIY low-cost photobooth for events. App based off Shmile: http://github.com:porkbuns/shmile.git
 
-[![Build Status](https://travis-ci.org/porkbuns/shmile.svg?branch=master)](https://travis-ci.org/porkbuns/shmile)
-[![Code Climate](https://codeclimate.com/github/porkbuns/shmile/badges/gpa.svg)](https://codeclimate.com/github/porkbuns/shmile)
+### Added CPC Features
 
-With your digital camera, a laptop and a printer, you can have your own DIY low-cost photobooth.
+#### CPC Branded
+Overlay image has been branded with CP Open House. All colors in user interface utilize CPC branding.
+
+#### MinimalForm: https://github.com/codrops/MinimalForm
+After the app has cycled through 4 photos, it now displays MinimalForm while hiding the composited image. This allows CPC to gather user information.
+
+#### Google Spreadsheet for User Data
+User data submited through MinimalForm is stored in google spreadsheet - currently titled CPC_OpenHouse under the calpolycorporation@gmail.com account.
+Documentation used to create this feature:
+http://railsrescue.com/blog/2015-05-28-step-by-step-setup-to-send-form-data-to-google-sheets/
+
+
+### Installation for CPC Event
+
+#### Technology
+All devices need to be connected to the same network - perferable cpc-wifi.
+
+Laptop needs to be connected to ethernet to connected to the .93 server. This allows us to sym-link photos from laptop to server so print and copy can grab them. ( this feature was used for OpenHouse)
+
+Make sure computer registers camera when you connect it - iPhotos will open. 
+
 
 ### Before you get started
 
@@ -34,6 +53,27 @@ relatively simple to set up.
    environment variable. For example:
 
     $ PRINTER=true coffee app.coffee
+
+#### Issues Documented During CP OpenHouse - Version 1.0
+
+Only 1 device should be connected to port 3000. Too many devices connected makes it crash. Make sure all browsers on laptop and iPad are not viewing the app. Then open just 1 browser.
+
+Low batterpower on the camera = no pictures being taken
+
+Camera has to be set to JPEG. No RAW photos allowed. 
+
+Sophias camera did not work with the app - newer cannon SLR, while the CPC Nikon SLR worked fine. 
+
+Cord connecting laptop to camera would jiggle loose if camera was moved - caused a crash. 
+
+Test app with camera that will be used thorughly before using during event. 
+
+
+
+##### Cord connecting 
+
+
+
 
 ### Deploying/running
 

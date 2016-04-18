@@ -32,7 +32,3 @@ SocketProxy.prototype.emit = function(msg, data) {
   }
   this.socket.emit(msg, data);
 }
-
-
-
-

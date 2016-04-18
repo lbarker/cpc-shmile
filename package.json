@@ -1,8 +1,8 @@
 {
   "name": "CPC Shmile",
   "version": "0.3.0",
-  "author": "Andrew Hao <andrewhao@gmail.com> (http://www.g9labs.com)",
-  "description": "Photobooth controller for Node.",
+  "author": "Lauren Barker <lbarker@calpoly.edu>",
+  "description": "Photobooth controller for Node created by Andrew Hao <andrewhao@gmail.com>.",
   "keywords": [
     "nodejs",
     "photos",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com:porkbuns/shmile.git"
+    "url": ""
   },
   "dependencies": {
     "socket.io": "~0.9.16",
